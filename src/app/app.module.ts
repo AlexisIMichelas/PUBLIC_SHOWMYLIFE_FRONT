@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import {CloudinaryModule} from '@cloudinary/ng';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,6 +49,7 @@ import { UserManagementComponent } from './components/user-management/user-manag
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    CloudinaryModule,
     ReactiveFormsModule
   ],
   providers: [],

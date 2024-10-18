@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from '../../models/article.model';
 import { ArticleService } from '../../services/article.service';
-import { StorageService } from '../../_services/storage.service'; // Importer le service de stockage
 
 @Component({
   selector: 'app-article-details',
@@ -21,22 +20,19 @@ export class ArticleDetailsComponent implements OnInit {
   };
 
   message = '';
-  editMode: boolean = false; // Variable pour le mode d'édition
-  selectedFile: File | null = null; // Pour stocker le fichier sélectionné
+  editMode: boolean = false;
+  selectedFile: File | null = null;
 
   constructor(
     private articleService: ArticleService,
     private route: ActivatedRoute,
-    private router: Router,
-    private storageService: StorageService // Injection du service de stockage
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     if (!this.viewMode) {
       this.message = '';
       this.getArticle(this.route.snapshot.params['id']);
-
-      // Vérifiez si le mode d'édition est activé
       this.route.queryParams.subscribe(params => {
         this.editMode = params['edit'] === 'true';
       });
@@ -53,10 +49,6 @@ export class ArticleDetailsComponent implements OnInit {
     });
   }
 
-  editArticle(): void {
-    this.router.navigate(['/articles', this.currentArticle.id], { queryParams: { edit: true } });
-  }
-
   deleteArticle(): void {
     this.articleService.delete(this.currentArticle.id).subscribe({
       next: (res) => {
@@ -68,33 +60,53 @@ export class ArticleDetailsComponent implements OnInit {
   }
 
   updateArticle(): void {
+    // Vérification des champs obligatoires
     if (!this.currentArticle.title || !this.currentArticle.description) {
       alert("Le titre et la description sont obligatoires !");
-      return; // Ne pas procéder si les champs obligatoires ne sont pas remplis
+      return;
     }
 
-    const formData = new FormData();
-    formData.append('title', this.currentArticle.title);
-    formData.append('description', this.currentArticle.description);
-    formData.append('published', this.currentArticle.published ? 'true' : 'false');
+    const updateData = {
+      title: this.currentArticle.title,
+      description: this.currentArticle.description,
+      published: this.currentArticle.published,
+      image: this.currentArticle.image // On garde la même image par défaut
+    };
 
-    // Ajouter le fichier s'il existe
+    // Si un fichier a été sélectionné, le lire comme base64
     if (this.selectedFile) {
-      formData.append('image', this.selectedFile, this.selectedFile.name);
-    }
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        updateData.image = event.target.result; // La chaîne base64
 
-    // Envoi de la requête de mise à jour
-    this.articleService.update(this.currentArticle.id, formData).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.message = "L'article a été mis à jour avec succès.";
-        this.router.navigate(['/articles']);
-      },
-      error: (e) => {
-        console.error(e);
-        this.message = "Erreur lors de la mise à jour de l'article.";
-      }
-    });
+        // Mettre à jour l'article
+        this.articleService.update(this.currentArticle.id, updateData).subscribe({
+          next: (res) => {
+            console.log(res);
+            this.message = "L'article a été mis à jour avec succès.";
+            this.router.navigate(['/articles']);
+          },
+          error: (e) => {
+            console.error(e);
+            this.message = "Erreur lors de la mise à jour de l'article.";
+          }
+        });
+      };
+      reader.readAsDataURL(this.selectedFile); // Lire le fichier comme base64
+    } else {
+      // Si aucun fichier n'est sélectionné, mettez simplement à jour les autres champs
+      this.articleService.update(this.currentArticle.id, updateData).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.message = "L'article a été mis à jour avec succès.";
+          this.router.navigate(['/articles']);
+        },
+        error: (e) => {
+          console.error(e);
+          this.message = "Erreur lors de la mise à jour de l'article.";
+        }
+      });
+    }
   }
 
   selectFile(event: any): void {

@@ -10,7 +10,8 @@
       </div>
       <div class="modal-body d-flex">
         <div class="image-container">
-          <img *ngIf="article?.image" [src]="article?.image" class="img-fluid" alt="Article Image">
+          <!-- Ajout d'un contrôle pour vérifier que 'article' et 'article.image' ne sont pas undefined -->
+          <img *ngIf="article?.image" [src]="article?.image" alt="Article Image" class="img-fluid" />
         </div>
         <div class="description-container">
           <p>{{ article?.description }}</p>

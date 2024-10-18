@@ -48,6 +48,11 @@
             </div>
           </div>
 
+          <!-- Affichage de l'image Cloudinary -->
+          <div *ngIf="img">
+            <advanced-image [cldImg]="img"></advanced-image>
+          </div>
+
           <button
             (click)="saveArticle()"
             [disabled]="title.invalid || description.invalid"
@@ -65,10 +70,3 @@
     </div>
   </div>
 </div>
-
-<!-- Message pour les utilisateurs non admins -->
-<ng-template #noAccess>
-  <div class="alert alert-danger mt-5">
-    Vous n'avez pas les droits nécessaires pour ajouter un article.
-  </div>
-</ng-template>
