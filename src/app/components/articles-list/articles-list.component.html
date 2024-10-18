@@ -30,12 +30,7 @@
         [class.active]="i === currentIndex"
         (click)="setActiveArticle(article, i)"
       >
-        <!-- Affichage de l'image de l'article -->
-        <div *ngIf="article.cloudinaryImage">
-          <img [src]="article.cloudinaryImage" alt="{{ article.title }}" style="width: 50px; height: 50px; margin-right: 10px;"/>
-        </div>
         {{ article.title }}
-
         <button
           class="btn btn-warning btn-sm float-right"
           (click)="editArticle(article)"
@@ -69,9 +64,19 @@
   </div>
 
   <div class="col-md-6">
-    <app-article-details
-      [viewMode]="true"
-      [currentArticle]="currentArticle"
-    ></app-article-details>
+    <h4 class="text-center">Aperçu de l'article</h4>
+    <div *ngIf="currentArticle" class="card">
+      <img
+        *ngIf="currentArticle.image"
+        [src]="currentArticle.image"
+        class="card-img-top"
+        alt="Aperçu de l'article"
+        style="max-height: 200px; object-fit: cover;"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ currentArticle.title }}</h5>
+        <p class="card-text">{{ currentArticle.description }}</p>
+      </div>
+    </div>
   </div>
 </div>

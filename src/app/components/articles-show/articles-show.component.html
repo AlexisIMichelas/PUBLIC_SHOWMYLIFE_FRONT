@@ -5,7 +5,9 @@
   <!-- Champ de recherche -->
   <div class="mb-4">
     <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher par titre" class="form-control" />
-    <button (click)="searchArticles()" class="btn btn-primary mt-2">Rechercher</button>
+    <div class="text-center mt-2"> <!-- Centrage du bouton -->
+      <button (click)="searchArticles()" class="btn btn-primary">Rechercher</button>
+    </div>
   </div>
 
   <div class="row">
