@@ -25,13 +25,12 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
+    this.setInitialTheme();
 
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
-
-      // Ajoutez des vérifications pour user et user.roles
       if (user) {
-        this.roles = user.roles || []; // Utiliser un tableau vide par défaut
+        this.roles = user.roles || [];
         this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
         this.username = user.username;
       } else {
@@ -46,11 +45,24 @@ export class AppComponent {
 
   logout(): void {
     console.log('Tentative de déconnexion...');
-    this.authService.logout(); // Appelle simplement le logout du service
-    window.location.reload(); // Rechargez la page pour actualiser l'interface
+    this.authService.logout();
+    window.location.reload();
   }
 
   goBack(): void {
     window.history.back();
+  }
+
+  toggleDarkTheme(): void {
+    document.body.classList.toggle('dark-theme');
+  }
+
+  setInitialTheme(): void {
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    document.body.classList.toggle('dark-theme', prefersDarkScheme.matches);
+  }
+
+  isDarkThemeActive(): boolean {
+    return document.body.classList.contains('dark-theme');
   }
 }

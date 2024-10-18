@@ -1,4 +1,3 @@
-/* styles.css */
 @import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
@@ -8,6 +7,9 @@ body {
   height: 100vh; /* Assurez-vous que le corps occupe toute la hauteur de la fenêtre */
   background: linear-gradient(to right, #1e90ff, #ff69b4); /* Dégradé du bleu au rose */
   font-family: 'Marvel', sans-serif; /* Définit la police par défaut pour le corps */
+  overflow-x: hidden; /* Pour éviter le scroll horizontal */
+  overflow-y: auto; /* Pour permettre le scroll vertical */
+  min-height: 100vh; /* Assurez-vous que le corps a une hauteur minimale */
 }
 
 /* Applique Just Another Hand aux titres */
@@ -15,16 +17,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Just Another Hand', cursive; /* Applique la police Just Another Hand aux titres */
 }
 
-a {
-  font-family: 'Marvel', sans-serif; /* Applique la police Just Another Hand aux titres */
+/* Applique Marvel aux paragraphes et aux liens */
+a, p {
+  font-family: 'Marvel', sans-serif; /* Applique la police Marvel aux liens et paragraphes */
 }
 
-/* Applique Marvel aux paragraphes */
-p {
-  font-family: 'Marvel', sans-serif; /* Applique la police Marvel aux paragraphes */
-}
-
-/* Optionnel : personnalisation des tailles de police */
+/* Personnalisation des tailles de police */
 h1 {
   font-size: 2.5rem; /* Taille pour h1 */
 }
@@ -48,5 +46,66 @@ h3 {
   border-radius: 8px; /* Ajoute un léger arrondi aux coins */
 }
 
+/* Variables pour les thèmes des navbars */
+:root {
+  --navbar-background-color: rgba(245, 244, 245); /* Couleur de fond pour la navbar claire */
+  --navbar-text-color: black; /* Couleur de texte pour la navbar claire */
+}
 
-/* Et ainsi de suite pour h4, h5, h6 si besoin */
+.dark-theme {
+  --navbar-background-color: #343a40; /* Couleur de fond sombre pour la navbar */
+  --navbar-text-color: white; /* Couleur de texte sombre pour la navbar */
+}
+
+/* Navbar en haut avec couleur solide et opacité */
+.navbar {
+  background-color: var(--navbar-background-color); /* Utilisation de la variable pour le fond */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Bordure noire en bas pour la navbar du haut */
+.navbar-top {
+  border-bottom: 2px solid black;
+}
+
+/* Bordure noire en haut pour la navbar du bas */
+.navbar-bottom {
+  border-top: 2px solid black;
+}
+
+/* Couleur de texte pour les liens dans la navbar */
+.navbar-nav .nav-link {
+  color: var(--navbar-text-color) !important; /* Utilisation de la couleur héritée de la navbar */
+  font-weight: bold;
+}
+
+/* Couleur de texte pour le lien de marque (Showmylife) */
+.navbar-brand {
+  color: var(--navbar-text-color) !important; /* Utilisation de la couleur héritée de la navbar */
+  font-weight: bold;
+}
+
+/* Couleur des icônes dans la navbar */
+.navbar-nav .nav-link div i {
+  color: var(--navbar-text-color) !important; /* Utilisation de la couleur héritée pour les icônes */
+}
+
+/* Changer la couleur au survol pour les liens */
+.navbar-nav .nav-link:hover {
+  color: blue; /* Couleur au survol */
+}
+
+/* Changer la couleur au survol pour le lien de marque */
+.navbar-brand:hover {
+  color: blue !important; /* Couleur au survol */
+}
+
+/* Assurez-vous qu'il y a assez d'espace pour la navbar en bas */
+.container {
+  padding-bottom: 60px; /* Espace pour la navbar fixe en bas */
+}
+
+/* Navbar toujours au-dessus du contenu */
+.fixed-bottom {
+  z-index: 1030;
+}
