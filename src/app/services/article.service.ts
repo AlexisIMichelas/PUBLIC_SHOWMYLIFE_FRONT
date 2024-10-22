@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Article } from '../models/article.model';
 import { environment } from '../../environments/environments';
 
-const baseUrl = 'https://showmylife-back.vercel.app/api/articles';
+const baseUrl = 'https://YOUR_BACK/api/articles';
 
 @Injectable({
   providedIn: 'root',

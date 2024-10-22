@@ -1,8 +1,8 @@
 export const environment = {
   production: false,
   cloudinary: {
-    cloudName: 'ddaxulsi7',
-    apiKey: '774926812947897',
-    apiSecret: 'lM82vvfwcA5I8fTCrxdnNzl1pB8'
+    cloudName: 'YOUR_CLOUDNAME',
+    apiKey: 'YOUR_API_KEY',
+    apiSecret: 'YOUR_API_SECRET'
   }
 };

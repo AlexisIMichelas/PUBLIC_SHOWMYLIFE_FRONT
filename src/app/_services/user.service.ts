@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { StorageService } from './storage.service'; // Importer le StorageService pour récupérer le token
 
-const baseUrl = 'https://showmylife-back.vercel.app/api/users'; // Assurez-vous que l'URL est correcte
+const baseUrl = 'https://YOUR_BACK/api/users'; // Assurez-vous que l'URL est correcte
 
 @Injectable({
   providedIn: 'root',
