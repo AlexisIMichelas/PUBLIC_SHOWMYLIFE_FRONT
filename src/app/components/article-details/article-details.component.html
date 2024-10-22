@@ -1,55 +1,30 @@
-<div *ngIf="currentArticle.id">
-  <h4>Article</h4>
-
-  <div *ngIf="!editMode">
-    <div>
-      <label><strong>Titre:</strong></label>
-      {{ currentArticle.title }}
-    </div>
-
-    <div>
-      <label><strong>Description:</strong></label>
-      {{ currentArticle.description }}
-    </div>
-
-    <div *ngIf="currentArticle.image">
-      <label><strong>Image:</strong></label><br>
-      <img [src]="'http://localhost:8080/uploads/' + currentArticle.image"
-           alt="Article Image"
-           style="max-width: 300px; max-height: 300px;">
-    </div>
-
-    <div>
-      <label><strong>Status:</strong></label>
-      {{ currentArticle.published ? "Published" : "Pending" }}
-    </div>
-
-    <!-- Afficher le bouton "Modifier" sans condition de rôle -->
-    <button (click)="editArticle()" class="btn btn-warning">Modifier l'article</button>
+<form (ngSubmit)="updateArticle()">
+  <div class="form-group">
+      <label>Titre:</label>
+      <input
+          type="text"
+          [(ngModel)]="currentArticle.title"
+          name="title"
+          class="form-control"
+          required
+      />
   </div>
 
-  <!-- Formulaire d'édition -->
-  <div *ngIf="editMode">
-    <h4>Modifier l'article</h4>
-    <form (ngSubmit)="updateArticle()">
-      <div class="form-group">
-        <label>Titre:</label>
-        <input type="text" [(ngModel)]="currentArticle.title" name="title" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label>Description:</label>
-        <textarea [(ngModel)]="currentArticle.description" name="description" class="form-control" required></textarea>
-      </div>
-      <div class="form-group">
-        <label>Image:</label>
-        <input type="file" (change)="selectFile($event)" class="form-control">
-      </div>
-      <button type="submit" class="btn btn-primary">Mettre à jour l'article</button>
-
-      <!-- Afficher le bouton "Supprimer" sans condition de rôle -->
-      <button type="button" (click)="deleteArticle()" class="btn btn-danger">Supprimer l'article</button>
-    </form>
+  <div class="form-group">
+      <label>Description:</label>
+      <textarea
+          [(ngModel)]="currentArticle.description"
+          name="description"
+          class="form-control"
+          required
+      ></textarea>
   </div>
-</div>
 
-<p *ngIf="!currentArticle.id">Cliquer sur l'article pour modifier ou supprimer</p>
+  <div class="form-group">
+      <label>Image:</label>
+      <input type="file" (change)="selectFile($event)" class="form-control" />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Mettre à jour l'article</button>
+  <button type="button" (click)="deleteArticle()" class="btn btn-danger">Supprimer l'article</button>
+</form>

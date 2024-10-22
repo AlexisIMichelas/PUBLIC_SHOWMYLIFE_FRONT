@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Article } from '../models/article.model';
+import { environment } from '../../environments/environments';
 
-const baseUrl = 'http://localhost:8080/api/articles';
+const baseUrl = 'https://showmylife-back.vercel.app/api/articles';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleService {
+  // Cloudinary configuration
+  private cloudinaryUrl = 'https://api.cloudinary.com/v1_1/ddaxulsi7/image/upload'; // Remplace par ton Cloud Name
+  private cloudinaryUploadPreset = 'my_upload_preset'; // Remplace par ton upload preset
+
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Article[]> {
@@ -39,18 +44,14 @@ export class ArticleService {
     return this.http.get<Article[]>(`${baseUrl}?title=${title}`);
   }
 
-  // File upload method using HttpRequest and HttpClient
-  upload(file: File): Observable<HttpEvent<any>> {
+  // File upload method to Cloudinary
+  upload(file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file);
+    formData.append('upload_preset', this.cloudinaryUploadPreset); // Ajoute le preset
 
     // Create an HttpRequest for file upload
-    const req = new HttpRequest('POST', `${baseUrl}/upload`, formData, {
-      reportProgress: true,
-      responseType: 'json',
-    });
-
-    return this.http.request(req);
+    return this.http.post(this.cloudinaryUrl, formData);
   }
 
   // Method to get all uploaded files

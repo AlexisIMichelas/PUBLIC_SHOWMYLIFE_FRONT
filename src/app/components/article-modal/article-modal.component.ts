@@ -5,6 +5,10 @@ import { CommentService } from '../../services/comment.service';
 import { StorageService } from '../../_services/storage.service';
 import { catchError, of, tap } from 'rxjs'; // Importation des opérateurs nécessaires
 
+// Importer Cloudinary et les actions nécessaires
+import { Cloudinary } from '@cloudinary/url-gen';
+import { fill } from '@cloudinary/url-gen/actions/resize';
+
 @Component({
   selector: 'app-article-modal',
   templateUrl: './article-modal.component.html',
@@ -12,32 +16,6 @@ import { catchError, of, tap } from 'rxjs'; // Importation des opérateurs néce
 })
 export class ArticleModalComponent implements OnInit {
   @Input() article?: Article; // Reçoit l'article depuis le parent
-
-  comments: Comment[] = []; // Liste des commentaires
-  newCommentContent: string = ''; // Contenu du nouveau commentaire
-  userId: number = 0; // ID de l'utilisateur connecté
-  userName: string = ''; // Nom de l'utilisateur connecté
-  isAdmin: boolean = false; // Drapeau pour vérifier si l'utilisateur est admin
-
-  constructor(
-    private commentService: CommentService,
-    private storageService: StorageService
-  ) {}
-
-  ngOnInit(): void {
-    this.getComments(); // Charge les commentaires existants
-    this.getUserData(); // Charge les données de l'utilisateur connecté
-  }
-
-  openModal(article: Article): void {
-    this.article = article;
-    this.getComments(); // Récupère les commentaires à chaque fois que le modal est ouvert
-    const modal = document.getElementById('articleModal');
-    if (modal) {
-      modal.style.display = 'block'; // Affiche le modal
-    }
-  }
-
 
   closeModal(): void {
     const modal = document.getElementById('articleModal');

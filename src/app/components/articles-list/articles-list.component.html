@@ -6,12 +6,14 @@
         class="form-control"
         placeholder="Taper le titre de l'article"
         [(ngModel)]="title"
+        aria-label="Titre de l'article"
       />
       <div class="input-group-append">
         <button
           class="btn btn-outline-secondary"
           type="button"
           (click)="searchTitle()"
+          aria-label="Rechercher"
         >
           Rechercher
         </button>
@@ -19,48 +21,62 @@
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-4">
     <h4 class="text-center">Les articles</h4>
     <ul class="list-group">
       <li
         *ngFor="let article of articles; let i = index"
         class="list-group-item"
-        [class.active]="i == currentIndex"
+        [class.active]="i === currentIndex"
         (click)="setActiveArticle(article, i)"
       >
         {{ article.title }}
-
-        <!-- Afficher les boutons de modification sans condition de rôle -->
         <button
           class="btn btn-warning btn-sm float-right"
           (click)="editArticle(article)"
+          [attr.aria-label]="'Modifier l\'article ' + article.title"
         >
           Modifier
         </button>
       </li>
+      <li *ngIf="articles.length === 0" class="list-group-item text-center">
+        Aucun article trouvé.
+      </li>
     </ul>
 
-    <!-- Afficher les boutons de suppression sans condition de rôle -->
-    <button
-      class="m-3 btn btn-sm btn-danger"
-      (click)="removeAllArticles()"
-    >
-      Tout supprimer
-    </button>
-
-    <button
-      class="m-3 btn btn-sm btn-danger"
-      (click)="removeArticle(currentArticle.id)"
-      [disabled]="currentIndex === -1"
-    >
-      Supprimer l'article sélectionné
-    </button>
+    <div class="d-flex justify-content-between mt-3">
+      <button
+        class="btn btn-sm btn-danger"
+        (click)="removeAllArticles()"
+        aria-label="Supprimer tous les articles"
+      >
+        Tout supprimer
+      </button>
+      <button
+        class="btn btn-sm btn-danger"
+        (click)="removeArticle(currentArticle.id!)"
+        [disabled]="currentIndex === -1 || !currentArticle.id"
+        aria-label="Supprimer l'article sélectionné"
+      >
+        Supprimer l'article sélectionné
+      </button>
+    </div>
   </div>
 
   <div class="col-md-6">
-    <app-article-details
-      [viewMode]="true"
-      [currentArticle]="currentArticle"
-    ></app-article-details>
+    <h4 class="text-center">Aperçu de l'article</h4>
+    <div *ngIf="currentArticle" class="card">
+      <img
+        *ngIf="currentArticle.image"
+        [src]="currentArticle.image"
+        class="card-img-top"
+        alt="Aperçu de l'article"
+        style="max-height: 200px; object-fit: cover;"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ currentArticle.title }}</h5>
+        <p class="card-text">{{ currentArticle.description }}</p>
+      </div>
+    </div>
   </div>
 </div>
