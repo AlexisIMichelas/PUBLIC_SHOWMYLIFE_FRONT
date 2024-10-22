@@ -1,14 +1,12 @@
-<div class="container" *ngIf="currentUser">
+<div class="container my-5" *ngIf="currentUser">
   <header class="text-center">
     <i class="fa-solid fa-user fa-3x mb-3"></i>
-    <h3>Bienvenue sur votre profil {{ currentUser.username }}
-      <p>Votre email est : {{ currentUser.email }}</p>
-    </h3>
+    <h3>Bienvenue sur votre profil {{ currentUser.username }}</h3>
   </header>
 
-  <div class="row my-4">
+  <div class="row my-4 justify-content-center">
     <!-- Carte pour changer l'email -->
-    <div class="col-md-6 d-flex">
+    <div class="col-md-5 d-flex">
       <div class="card flex-fill">
         <div class="card-body">
           <h4 class="card-title text-center">Vous souhaitez changer votre email ?</h4>
@@ -29,7 +27,7 @@
     </div>
 
     <!-- Carte pour changer le mot de passe -->
-    <div class="col-md-6 d-flex">
+    <div class="col-md-5 d-flex">
       <div class="card flex-fill">
         <div class="card-body">
           <h4 class="card-title text-center">Vous souhaitez changer votre mot de passe ?</h4>

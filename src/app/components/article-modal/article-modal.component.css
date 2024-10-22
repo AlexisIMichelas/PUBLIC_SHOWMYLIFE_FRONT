@@ -1,35 +1,103 @@
 .modal {
   display: block;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto; /* Ajoute un défilement vertical si nécessaire */
 }
 
 .modal-dialog {
-  max-width: 80%; /* Limite la largeur de la modal à 80% de la fenêtre */
-  max-height: 80vh; /* Limite la hauteur de la modal à 80% de la hauteur de la fenêtre */
-  margin: auto; /* Centre le modal */
+  max-width: 90%; /* Limite la largeur de la modal à 90% de la fenêtre pour les petits écrans */
+  max-height: 90vh; /* Limite la hauteur de la modal à 90% de la hauteur de la fenêtre */
+  margin: auto; /* Centre la modal */
 }
 
 .modal-content {
   border-radius: 8px; /* Ajoute des coins arrondis */
   overflow: hidden; /* Masque le débordement */
   display: flex; /* Utilise flexbox pour l'alignement */
+  flex-direction: column; /* Permet d'empiler le contenu verticalement sur les petits écrans */
 }
 
-/* Styles pour l'image */
+.modal-header {
+  display: flex; /* Utilise flexbox pour aligner les éléments horizontalement */
+  justify-content: flex-end; /* Aligne le bouton de fermeture à droite */
+  align-items: center; /* Aligne les éléments verticalement au centre */
+}
+
+.modal-header .close {
+  color: red; /* Change la couleur de la croix en rouge */
+  font-size: 1.5rem; /* Ajuste la taille de la croix */
+  background: transparent; /* Enlève l'arrière-plan du bouton */
+  border: none; /* Enlève la bordure du bouton */
+  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+}
+
+.modal-title {
+  margin-bottom: 20px; /* Ajoute un espace entre le titre et l'image */
+  text-align: center; /* Centre le titre horizontalement */
+}
+
 .image-container {
   flex: 1; /* Permet à l'image de prendre de l'espace */
   display: flex;
   justify-content: center; /* Centre l'image horizontalement */
   align-items: center; /* Centre l'image verticalement */
+  padding: 10px; /* Ajoute un peu d'espace autour de l'image */
 }
 
 .image-container img {
   max-width: 100%; /* L'image ne dépassera jamais la largeur de son conteneur */
-  max-height: 70vh; /* Limite la hauteur de l'image à 70% de la hauteur de la fenêtre */
+  max-height: 60vh; /* Limite la hauteur de l'image à 60% de la hauteur de la fenêtre */
   object-fit: contain; /* Ajuste l'image sans la déformer */
 }
 
 .description-container {
   flex: 1; /* Permet à la description de prendre de l'espace */
   padding: 20px; /* Ajoute un peu d'espace autour de la description */
+  overflow-y: auto; /* Ajoute un défilement vertical si nécessaire */
+}
+
+.modal-footer {
+  display: flex; /* Utilise flexbox pour aligner les éléments dans le footer */
+  justify-content: flex-end; /* Aligne les boutons à droite */
+}
+
+.btn-danger {
+  background-color: red; /* Définit le bouton "Fermer" en rouge */
+  border: none; /* Enlève la bordure du bouton */
+  color: white; /* Définit la couleur du texte en blanc */
+}
+
+/* Media Queries pour ajuster le style sur des écrans plus larges */
+@media (min-width: 768px) {
+  .modal-dialog {
+    max-width: 80%; /* Limite la largeur de la modal à 80% pour les écrans plus larges */
+  }
+
+  .modal-content {
+    flex-direction: column; /* Affiche le contenu de manière verticale sur les écrans plus larges */
+  }
+
+  .image-container,
+  .description-container {
+    flex: 1; /* Chaque conteneur prend une part égale de l'espace */
+  }
+
+  .image-container img {
+    max-height: 70vh; /* Ajuste la hauteur de l'image pour les écrans plus larges */
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal-dialog {
+    max-width: 40%; /* Limite la largeur de la modal à 40% pour les très grands écrans */
+    max-height: 70vh; /* Limite la hauteur de la modal à 70% de la hauteur de la fenêtre */
+  }
+
+  .image-container img {
+    max-height: 50vh; /* Réduit la hauteur de l'image à 50% de la hauteur de la fenêtre */
+  }
+
+  .modal-header .close {
+    font-size: 1.8rem; /* Ajuste la taille de la croix pour les écrans plus grands */
+  }
 }

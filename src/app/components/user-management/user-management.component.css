@@ -1,0 +1,53 @@
+.container {
+  margin: 20px auto; /* Centrage du conteneur */
+  max-width: 90%; /* Limite la largeur sur les écrans plus grands */
+}
+
+h2 {
+  text-align: center; /* Centre le titre */
+  margin-bottom: 20px; /* Ajoute de l'espace en dessous du titre */
+}
+
+.table {
+  width: 100%; /* Prend toute la largeur du conteneur */
+  border-collapse: collapse; /* Évite les espaces entre les cellules */
+}
+
+.table th,
+.table td {
+  padding: 12px; /* Ajoute du padding pour plus d'espace */
+  text-align: left; /* Aligne le texte à gauche */
+  border-bottom: 1px solid #dee2e6; /* Bordure en bas des cellules */
+}
+
+.table th {
+  background-color: #f8f9fa; /* Couleur de fond pour l'en-tête */
+  font-weight: bold; /* Gras pour le texte de l'en-tête */
+}
+
+.table tr:hover {
+  background-color: #f1f1f1; /* Change le fond lors du survol d'une ligne */
+}
+
+.btn-danger {
+  background-color: #dc3545; /* Couleur de fond rouge */
+  border: none; /* Enlève la bordure */
+  color: white; /* Texte en blanc */
+  padding: 8px 12px; /* Ajoute du padding pour le bouton */
+  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Couleur plus foncée au survol */
+}
+
+/* Media Queries pour ajuster le style sur des écrans plus petits */
+@media (max-width: 768px) {
+  .table {
+    font-size: 14px; /* Réduit la taille de la police sur les petits écrans */
+  }
+
+  .btn-danger {
+    width: 100%; /* Prend toute la largeur sur les petits écrans */
+  }
+}

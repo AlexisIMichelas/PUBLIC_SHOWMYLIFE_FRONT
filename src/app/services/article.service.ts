@@ -58,4 +58,13 @@ export class ArticleService {
   getFiles(): Observable<any> {
     return this.http.get(`${baseUrl}/files`);
   }
+
+  getComments(articleId: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${baseUrl}/${articleId}/comments`);
+  }
+
+  // Créer un nouveau commentaire
+  createComment(articleId: number, comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(`${baseUrl}/${articleId}/comments`, comment);
+  }
 }

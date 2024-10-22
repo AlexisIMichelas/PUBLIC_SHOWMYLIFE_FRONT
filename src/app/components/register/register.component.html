@@ -23,12 +23,12 @@
             placeholder="Alexis"
           />
           <div class="invalid-feedback" *ngIf="username.errors && f.submitted">
-            <div *ngIf="username.errors['required']">Username is required</div>
+            <div *ngIf="username.errors['required']">Le nom est requis</div>
             <div *ngIf="username.errors['minlength']">
-              Username must be at least 3 characters
+              Le nom doit comporté au moins 3 caractères
             </div>
             <div *ngIf="username.errors['maxlength']">
-              Username must be at most 20 characters
+              Le nom ne doit pas depassé 20 caractères
             </div>
           </div>
         </div>
@@ -43,12 +43,12 @@
             email
             #email="ngModel"
             [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
-            placeholder="Alexis@mail.com"
+            placeholder="Alexis@gmail.com"
           />
           <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
-            <div *ngIf="email.errors['required']">Email is required</div>
+            <div *ngIf="email.errors['required']">Email est requis</div>
             <div *ngIf="email.errors['email']">
-              Email must be a valid email address
+              Email doit etre une adresse valide
             </div>
           </div>
         </div>
@@ -65,9 +65,9 @@
             [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
           />
           <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
-            <div *ngIf="password.errors['required']">Password is required</div>
+            <div *ngIf="password.errors['required']">Mot de passe requis</div>
             <div *ngIf="password.errors['minlength']">
-              Password must be at least 6 characters
+              Mot de passe doit comporté au moins 6 caractères
             </div>
           </div>
         </div>
@@ -76,12 +76,12 @@
         </div>
 
         <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-          Signup failed!<br />{{ errorMessage }}
+          Inscription échouée<br />{{ errorMessage }}
         </div>
       </form>
 
       <div class="alert alert-success" *ngIf="isSuccessful">
-        Your registration is successful!
+        Inscription bien réalisée !
       </div>
     </div>
   </div>

@@ -1,0 +1,14 @@
+.container {
+  max-width: 800px; /* Limite la largeur maximale pour le contenu */
+}
+
+.card {
+  margin: 10px; /* Ajoute un peu d'espace entre les cartes */
+  border-radius: 8px; /* Coins arrondis pour les cartes */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre légère pour les cartes */
+}
+
+.btn-primary {
+  width: 100%; /* Les boutons prennent toute la largeur de la carte */
+  margin-top: 10px; /* Espace au-dessus du bouton */
+}

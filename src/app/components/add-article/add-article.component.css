@@ -1,4 +1,12 @@
-.submit-form {
-  max-width: 400px;
-  margin: auto;
+.container {
+  display: flex; /* Utiliser flexbox pour le conteneur */
+  justify-content: center; /* Centre horizontalement le contenu */
+  align-items: center; /* Centre verticalement le contenu */
+  min-height: 90vh; /* Assure que le conteneur prend 90% de la hauteur de la fenêtre */
+  margin-top: -20px; /* Ajoute une marge négative pour remonter le formulaire */
+}
+
+.card {
+  width: 100%; /* Prend toute la largeur disponible */
+  max-width: 800px; /* Limite la largeur maximale à 800px */
 }
